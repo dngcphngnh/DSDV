@@ -1,0 +1,561 @@
+Count,Gender,Age,Occupation,SleepDuration,QualityofSleep,StressLevel,SleepDisorder
+1,Male,27,Software Engineer,6.1,6,6,
+2,Male,28,Doctor,6.2,6,8,
+3,Male,28,Doctor,6.2,6,8,
+4,Male,28,Sales Representative,5.9,4,8,Sleep Apnea
+5,Male,28,Sales Representative,5.9,4,8,Sleep Apnea
+6,Male,28,Software Engineer,5.9,4,8,Insomnia
+7,Male,29,Teacher,6.3,6,7,Insomnia
+8,Male,29,Doctor,7.8,7,6,
+9,Male,29,Doctor,7.8,7,6,
+10,Male,29,Doctor,7.8,7,6,
+11,Male,29,Doctor,6.1,6,8,
+12,Male,29,Doctor,7.8,7,6,
+13,Male,29,Doctor,6.1,6,8,
+14,Male,29,Doctor,6,6,8,
+15,Male,29,Doctor,6,6,8,
+16,Male,29,Doctor,6,6,8,
+17,Female,29,Nurse,6.5,5,7,Sleep Apnea
+18,Male,29,Doctor,6,6,8,Sleep Apnea
+19,Female,29,Nurse,6.5,5,7,Insomnia
+20,Male,30,Doctor,7.6,7,6,
+21,Male,30,Doctor,7.7,7,6,
+22,Male,30,Doctor,7.7,7,6,
+23,Male,30,Doctor,7.7,7,6,
+24,Male,30,Doctor,7.7,7,6,
+25,Male,30,Doctor,7.8,7,6,
+26,Male,30,Doctor,7.9,7,6,
+27,Male,30,Doctor,7.8,7,6,
+28,Male,30,Doctor,7.9,7,6,
+29,Male,30,Doctor,7.9,7,6,
+30,Male,30,Doctor,7.9,7,6,
+31,Female,30,Nurse,6.4,5,7,Sleep Apnea
+32,Female,30,Nurse,6.4,5,7,Insomnia
+33,Female,31,Nurse,7.9,8,4,
+34,Male,31,Doctor,6.1,6,8,
+35,Male,31,Doctor,7.7,7,6,
+36,Male,31,Doctor,6.1,6,8,
+37,Male,31,Doctor,6.1,6,8,
+38,Male,31,Doctor,7.6,7,6,
+39,Male,31,Doctor,7.6,7,6,
+40,Male,31,Doctor,7.6,7,6,
+41,Male,31,Doctor,7.7,7,6,
+42,Male,31,Doctor,7.7,7,6,
+43,Male,31,Doctor,7.7,7,6,
+44,Male,31,Doctor,7.8,7,6,
+45,Male,31,Doctor,7.7,7,6,
+46,Male,31,Doctor,7.8,7,6,
+47,Male,31,Doctor,7.7,7,6,
+48,Male,31,Doctor,7.8,7,6,
+49,Male,31,Doctor,7.7,7,6,
+50,Male,31,Doctor,7.7,7,6,Sleep Apnea
+51,Male,32,Engineer,7.5,8,3,
+52,Male,32,Engineer,7.5,8,3,
+53,Male,32,Doctor,6,6,8,
+54,Male,32,Doctor,7.6,7,6,
+55,Male,32,Doctor,6,6,8,
+56,Male,32,Doctor,6,6,8,
+57,Male,32,Doctor,7.7,7,6,
+58,Male,32,Doctor,6,6,8,
+59,Male,32,Doctor,6,6,8,
+60,Male,32,Doctor,7.7,7,6,
+61,Male,32,Doctor,6,6,8,
+62,Male,32,Doctor,6,6,8,
+63,Male,32,Doctor,6.2,6,8,
+64,Male,32,Doctor,6.2,6,8,
+65,Male,32,Doctor,6.2,6,8,
+66,Male,32,Doctor,6.2,6,8,
+67,Male,32,Accountant,7.2,8,6,
+68,Male,33,Doctor,6,6,8,Insomnia
+69,Female,33,Scientist,6.2,6,6,
+70,Female,33,Scientist,6.2,6,6,
+71,Male,33,Doctor,6.1,6,8,
+72,Male,33,Doctor,6.1,6,8,
+73,Male,33,Doctor,6.1,6,8,
+74,Male,33,Doctor,6.1,6,8,
+75,Male,33,Doctor,6,6,8,
+76,Male,33,Doctor,6,6,8,
+77,Male,33,Doctor,6,6,8,
+78,Male,33,Doctor,6,6,8,
+79,Male,33,Doctor,6,6,8,
+80,Male,33,Doctor,6,6,8,
+81,Female,34,Scientist,5.8,4,8,Sleep Apnea
+82,Female,34,Scientist,5.8,4,8,Sleep Apnea
+83,Male,35,Teacher,6.7,7,5,
+84,Male,35,Teacher,6.7,7,5,
+85,Male,35,Software Engineer,7.5,8,5,
+86,Female,35,Accountant,7.2,8,4,
+87,Male,35,Engineer,7.2,8,4,
+88,Male,35,Engineer,7.2,8,4,
+89,Male,35,Engineer,7.3,8,4,
+90,Male,35,Engineer,7.3,8,4,
+91,Male,35,Engineer,7.3,8,4,
+92,Male,35,Engineer,7.3,8,4,
+93,Male,35,Software Engineer,7.5,8,5,
+94,Male,35,Lawyer,7.4,7,5,Sleep Apnea
+95,Female,36,Accountant,7.2,8,4,Insomnia
+96,Female,36,Accountant,7.1,8,4,
+97,Female,36,Accountant,7.2,8,4,
+98,Female,36,Accountant,7.1,8,4,
+99,Female,36,Teacher,7.1,8,4,
+100,Female,36,Teacher,7.1,8,4,
+101,Female,36,Teacher,7.2,8,4,
+102,Female,36,Teacher,7.2,8,4,
+103,Female,36,Teacher,7.2,8,4,
+104,Male,36,Teacher,6.6,5,7,Sleep Apnea
+105,Female,36,Teacher,7.2,8,4,Sleep Apnea
+106,Male,36,Teacher,6.6,5,7,Insomnia
+107,Female,37,Nurse,6.1,6,6,
+108,Male,37,Engineer,7.8,8,4,
+109,Male,37,Engineer,7.8,8,4,
+110,Male,37,Lawyer,7.4,8,5,
+111,Female,37,Accountant,7.2,8,4,
+112,Male,37,Lawyer,7.4,8,5,
+113,Female,37,Accountant,7.2,8,4,
+114,Male,37,Lawyer,7.4,8,5,
+115,Female,37,Accountant,7.2,8,4,
+116,Female,37,Accountant,7.2,8,4,
+117,Female,37,Accountant,7.2,8,4,
+118,Female,37,Accountant,7.2,8,4,
+119,Female,37,Accountant,7.2,8,4,
+120,Female,37,Accountant,7.2,8,4,
+121,Female,37,Accountant,7.2,8,4,
+122,Female,37,Accountant,7.2,8,4,
+123,Female,37,Accountant,7.2,8,4,
+124,Female,37,Accountant,7.2,8,4,
+125,Female,37,Accountant,7.2,8,4,
+126,Female,37,Nurse,7.5,8,4,
+127,Male,38,Lawyer,7.3,8,5,
+128,Female,38,Accountant,7.1,8,4,
+129,Male,38,Lawyer,7.3,8,5,
+130,Male,38,Lawyer,7.3,8,5,
+131,Female,38,Accountant,7.1,8,4,
+132,Male,38,Lawyer,7.3,8,5,
+133,Male,38,Lawyer,7.3,8,5,
+134,Female,38,Accountant,7.1,8,4,
+135,Male,38,Lawyer,7.3,8,5,
+136,Male,38,Lawyer,7.3,8,5,
+137,Female,38,Accountant,7.1,8,4,
+138,Male,38,Lawyer,7.1,8,5,
+139,Female,38,Accountant,7.1,8,4,
+140,Male,38,Lawyer,7.1,8,5,
+141,Female,38,Accountant,7.1,8,4,
+142,Male,38,Lawyer,7.1,8,5,
+143,Female,38,Accountant,7.1,8,4,
+144,Female,38,Accountant,7.1,8,4,
+145,Male,38,Lawyer,7.1,8,5,Sleep Apnea
+146,Female,38,Lawyer,7.4,7,5,Sleep Apnea
+147,Male,39,Lawyer,7.2,8,5,Insomnia
+148,Male,39,Engineer,6.5,5,7,Insomnia
+149,Female,39,Lawyer,6.9,7,6,
+150,Female,39,Accountant,8,9,3,
+151,Female,39,Accountant,8,9,3,
+152,Male,39,Lawyer,7.2,8,5,
+153,Male,39,Lawyer,7.2,8,5,
+154,Male,39,Lawyer,7.2,8,5,
+155,Male,39,Lawyer,7.2,8,5,
+156,Male,39,Lawyer,7.2,8,5,
+157,Male,39,Lawyer,7.2,8,5,
+158,Male,39,Lawyer,7.2,8,5,
+159,Male,39,Lawyer,7.2,8,5,
+160,Male,39,Lawyer,7.2,8,5,
+161,Male,39,Lawyer,7.2,8,5,
+162,Female,40,Accountant,7.2,8,6,
+163,Female,40,Accountant,7.2,8,6,
+164,Male,40,Lawyer,7.9,8,5,
+165,Male,40,Lawyer,7.9,8,5,
+166,Male,41,Lawyer,7.6,8,5,Insomnia
+167,Male,41,Engineer,7.3,8,6,
+168,Male,41,Lawyer,7.1,7,6,
+169,Male,41,Lawyer,7.1,7,6,
+170,Male,41,Lawyer,7.7,8,5,
+171,Male,41,Lawyer,7.7,8,5,
+172,Male,41,Lawyer,7.7,8,5,
+173,Male,41,Lawyer,7.7,8,5,
+174,Male,41,Lawyer,7.7,8,5,
+175,Male,41,Lawyer,7.6,8,5,
+176,Male,41,Lawyer,7.6,8,5,
+177,Male,41,Lawyer,7.6,8,5,
+178,Male,42,Salesperson,6.5,6,7,Insomnia
+179,Male,42,Lawyer,7.8,8,5,
+180,Male,42,Lawyer,7.8,8,5,
+181,Male,42,Lawyer,7.8,8,5,
+182,Male,42,Lawyer,7.8,8,5,
+183,Male,42,Lawyer,7.8,8,5,
+184,Male,42,Lawyer,7.8,8,5,
+185,Female,42,Teacher,6.8,6,7,Sleep Apnea
+186,Female,42,Teacher,6.8,6,7,Sleep Apnea
+187,Female,43,Teacher,6.7,7,4,Insomnia
+188,Male,43,Salesperson,6.3,6,7,Insomnia
+189,Female,43,Teacher,6.7,7,4,Insomnia
+190,Male,43,Salesperson,6.5,6,7,Insomnia
+191,Female,43,Teacher,6.7,7,4,Insomnia
+192,Male,43,Salesperson,6.4,6,7,Insomnia
+193,Male,43,Salesperson,6.5,6,7,Insomnia
+194,Male,43,Salesperson,6.5,6,7,Insomnia
+195,Male,43,Salesperson,6.5,6,7,Insomnia
+196,Male,43,Salesperson,6.5,6,7,Insomnia
+197,Male,43,Salesperson,6.5,6,7,Insomnia
+198,Male,43,Salesperson,6.5,6,7,Insomnia
+199,Male,43,Salesperson,6.5,6,7,Insomnia
+200,Male,43,Salesperson,6.5,6,7,Insomnia
+201,Male,43,Salesperson,6.5,6,7,Insomnia
+202,Male,43,Engineer,7.8,8,5,Insomnia
+203,Male,43,Engineer,7.8,8,5,Insomnia
+204,Male,43,Engineer,6.9,6,7,
+205,Male,43,Engineer,7.6,8,4,
+206,Male,43,Engineer,7.7,8,5,
+207,Male,43,Engineer,7.7,8,5,
+208,Male,43,Engineer,7.7,8,5,
+209,Male,43,Engineer,7.7,8,5,
+210,Male,43,Engineer,7.8,8,5,
+211,Male,43,Engineer,7.7,8,5,
+212,Male,43,Engineer,7.8,8,5,
+213,Male,43,Engineer,7.8,8,5,
+214,Male,43,Engineer,7.8,8,5,
+215,Male,43,Engineer,7.8,8,5,
+216,Male,43,Engineer,7.8,8,5,
+217,Male,43,Engineer,7.8,8,5,
+218,Male,43,Engineer,7.8,8,5,
+219,Male,43,Engineer,7.8,8,5,Sleep Apnea
+220,Male,43,Salesperson,6.5,6,7,Sleep Apnea
+221,Female,44,Teacher,6.6,7,4,Insomnia
+222,Male,44,Salesperson,6.4,6,7,Insomnia
+223,Male,44,Salesperson,6.3,6,7,Insomnia
+224,Male,44,Salesperson,6.4,6,7,Insomnia
+225,Female,44,Teacher,6.6,7,4,Insomnia
+226,Male,44,Salesperson,6.3,6,7,Insomnia
+227,Female,44,Teacher,6.6,7,4,Insomnia
+228,Male,44,Salesperson,6.3,6,7,Insomnia
+229,Female,44,Teacher,6.6,7,4,Insomnia
+230,Male,44,Salesperson,6.3,6,7,Insomnia
+231,Female,44,Teacher,6.6,7,4,Insomnia
+232,Male,44,Salesperson,6.3,6,7,Insomnia
+233,Female,44,Teacher,6.6,7,4,Insomnia
+234,Male,44,Salesperson,6.3,6,7,Insomnia
+235,Female,44,Teacher,6.6,7,4,Insomnia
+236,Male,44,Salesperson,6.3,6,7,Insomnia
+237,Male,44,Salesperson,6.4,6,7,Insomnia
+238,Female,44,Teacher,6.5,7,4,Insomnia
+239,Male,44,Salesperson,6.3,6,7,Insomnia
+240,Male,44,Salesperson,6.4,6,7,Insomnia
+241,Female,44,Teacher,6.5,7,4,Insomnia
+242,Male,44,Salesperson,6.3,6,7,Insomnia
+243,Male,44,Salesperson,6.4,6,7,Insomnia
+244,Female,44,Teacher,6.5,7,4,Insomnia
+245,Male,44,Salesperson,6.3,6,7,Insomnia
+246,Female,44,Teacher,6.5,7,4,Insomnia
+247,Male,44,Salesperson,6.3,6,7,Insomnia
+248,Male,44,Engineer,6.8,7,7,Insomnia
+249,Male,44,Salesperson,6.4,6,7,
+250,Male,44,Salesperson,6.5,6,7,
+251,Female,45,Teacher,6.8,7,6,Insomnia
+252,Female,45,Teacher,6.8,7,6,Insomnia
+253,Female,45,Teacher,6.5,7,4,Insomnia
+254,Female,45,Teacher,6.5,7,4,Insomnia
+255,Female,45,Teacher,6.5,7,4,Insomnia
+256,Female,45,Teacher,6.5,7,4,Insomnia
+257,Female,45,Teacher,6.6,7,4,Insomnia
+258,Female,45,Teacher,6.6,7,4,Insomnia
+259,Female,45,Teacher,6.6,7,4,Insomnia
+260,Female,45,Teacher,6.6,7,4,Insomnia
+261,Female,45,Teacher,6.6,7,4,Insomnia
+262,Female,45,Teacher,6.6,7,4,
+263,Female,45,Teacher,6.6,7,4,
+264,Female,45,Manager,6.9,7,5,
+265,Male,48,Doctor,7.3,7,5,Insomnia
+266,Female,48,Nurse,5.9,6,8,Sleep Apnea
+267,Male,48,Doctor,7.3,7,5,Insomnia
+268,Female,49,Nurse,6.2,6,8,
+269,Female,49,Nurse,6,6,8,Sleep Apnea
+270,Female,49,Nurse,6.1,6,8,Sleep Apnea
+271,Female,49,Nurse,6.1,6,8,Sleep Apnea
+272,Female,49,Nurse,6.1,6,8,Sleep Apnea
+273,Female,49,Nurse,6.1,6,8,Sleep Apnea
+274,Female,49,Nurse,6.2,6,8,Sleep Apnea
+275,Female,49,Nurse,6.2,6,8,Sleep Apnea
+276,Female,49,Nurse,6.2,6,8,Sleep Apnea
+277,Male,49,Doctor,8.1,9,3,Sleep Apnea
+278,Male,49,Doctor,8.1,9,3,Sleep Apnea
+279,Female,50,Nurse,6.1,6,8,Insomnia
+280,Female,50,Engineer,8.3,9,3,
+281,Female,50,Nurse,6,6,8,
+282,Female,50,Nurse,6.1,6,8,Sleep Apnea
+283,Female,50,Nurse,6,6,8,Sleep Apnea
+284,Female,50,Nurse,6,6,8,Sleep Apnea
+285,Female,50,Nurse,6,6,8,Sleep Apnea
+286,Female,50,Nurse,6,6,8,Sleep Apnea
+287,Female,50,Nurse,6,6,8,Sleep Apnea
+288,Female,50,Nurse,6,6,8,Sleep Apnea
+289,Female,50,Nurse,6,6,8,Sleep Apnea
+290,Female,50,Nurse,6.1,6,8,Sleep Apnea
+291,Female,50,Nurse,6,6,8,Sleep Apnea
+292,Female,50,Nurse,6.1,6,8,Sleep Apnea
+293,Female,50,Nurse,6.1,6,8,Sleep Apnea
+294,Female,50,Nurse,6,6,8,Sleep Apnea
+295,Female,50,Nurse,6.1,6,8,Sleep Apnea
+296,Female,50,Nurse,6,6,8,Sleep Apnea
+297,Female,50,Nurse,6.1,6,8,Sleep Apnea
+298,Female,50,Nurse,6.1,6,8,Sleep Apnea
+299,Female,51,Engineer,8.5,9,3,
+300,Female,51,Engineer,8.5,9,3,
+301,Female,51,Engineer,8.5,9,3,
+302,Female,51,Engineer,8.5,9,3,
+303,Female,51,Nurse,7.1,7,6,
+304,Female,51,Nurse,6,6,8,Sleep Apnea
+305,Female,51,Nurse,6.1,6,8,Sleep Apnea
+306,Female,51,Nurse,6.1,6,8,Sleep Apnea
+307,Female,52,Accountant,6.5,7,7,Insomnia
+308,Female,52,Accountant,6.5,7,7,Insomnia
+309,Female,52,Accountant,6.6,7,7,Insomnia
+310,Female,52,Accountant,6.6,7,7,Insomnia
+311,Female,52,Accountant,6.6,7,7,Insomnia
+312,Female,52,Accountant,6.6,7,7,Insomnia
+313,Female,52,Engineer,8.4,9,3,
+314,Female,52,Engineer,8.4,9,3,
+315,Female,52,Engineer,8.4,9,3,
+316,Female,53,Engineer,8.3,9,3,Insomnia
+317,Female,53,Engineer,8.5,9,3,
+318,Female,53,Engineer,8.5,9,3,
+319,Female,53,Engineer,8.4,9,3,
+320,Female,53,Engineer,8.4,9,3,
+321,Female,53,Engineer,8.5,9,3,
+322,Female,53,Engineer,8.4,9,3,
+323,Female,53,Engineer,8.4,9,3,
+324,Female,53,Engineer,8.5,9,3,
+325,Female,53,Engineer,8.3,9,3,
+326,Female,53,Engineer,8.5,9,3,
+327,Female,53,Engineer,8.3,9,3,
+328,Female,53,Engineer,8.5,9,3,
+329,Female,53,Engineer,8.3,9,3,
+330,Female,53,Engineer,8.5,9,3,
+331,Female,53,Engineer,8.5,9,3,
+332,Female,53,Engineer,8.4,9,3,
+333,Female,54,Engineer,8.4,9,3,
+334,Female,54,Engineer,8.4,9,3,
+335,Female,54,Engineer,8.4,9,3,
+336,Female,54,Engineer,8.4,9,3,
+337,Female,54,Engineer,8.4,9,3,
+338,Female,54,Engineer,8.4,9,3,
+339,Female,54,Engineer,8.5,9,3,
+340,Female,55,Nurse,8.1,9,4,Sleep Apnea
+341,Female,55,Nurse,8.1,9,4,Sleep Apnea
+342,Female,56,Doctor,8.2,9,3,
+343,Female,56,Doctor,8.2,9,3,
+344,Female,57,Nurse,8.1,9,3,
+345,Female,57,Nurse,8.2,9,3,Sleep Apnea
+346,Female,57,Nurse,8.2,9,3,Sleep Apnea
+347,Female,57,Nurse,8.2,9,3,Sleep Apnea
+348,Female,57,Nurse,8.2,9,3,Sleep Apnea
+349,Female,57,Nurse,8.2,9,3,Sleep Apnea
+350,Female,57,Nurse,8.1,9,3,Sleep Apnea
+351,Female,57,Nurse,8.1,9,3,Sleep Apnea
+352,Female,57,Nurse,8.1,9,3,Sleep Apnea
+353,Female,58,Nurse,8,9,3,Sleep Apnea
+354,Female,58,Nurse,8,9,3,Sleep Apnea
+355,Female,58,Nurse,8,9,3,Sleep Apnea
+356,Female,58,Nurse,8,9,3,Sleep Apnea
+357,Female,58,Nurse,8,9,3,Sleep Apnea
+358,Female,58,Nurse,8,9,3,Sleep Apnea
+359,Female,59,Nurse,8,9,3,
+360,Female,59,Nurse,8.1,9,3,
+361,Female,59,Nurse,8.2,9,3,Sleep Apnea
+362,Female,59,Nurse,8.2,9,3,Sleep Apnea
+363,Female,59,Nurse,8.2,9,3,Sleep Apnea
+364,Female,59,Nurse,8.2,9,3,Sleep Apnea
+365,Female,59,Nurse,8,9,3,Sleep Apnea
+366,Female,59,Nurse,8,9,3,Sleep Apnea
+367,Female,59,Nurse,8.1,9,3,Sleep Apnea
+368,Female,59,Nurse,8,9,3,Sleep Apnea
+369,Female,59,Nurse,8.1,9,3,Sleep Apnea
+370,Female,59,Nurse,8.1,9,3,Sleep Apnea
+371,Female,59,Nurse,8,9,3,Sleep Apnea
+372,Female,59,Nurse,8.1,9,3,Sleep Apnea
+373,Female,59,Nurse,8.1,9,3,Sleep Apnea
+374,Female,59,Nurse,8.1,9,3,Sleep Apnea
+375,Female,59,Nurse,8.1,9,3,Sleep Apnea
+376,Male,29,Doctor,7.8,7,6,
+377,Male,29,Doctor,7.8,7,6,
+378,Male,29,Doctor,6.1,6,8,
+379,Male,29,Doctor,7.8,7,6,
+380,Male,29,Doctor,6.1,6,8,
+381,Male,29,Doctor,6,6,8,
+382,Male,29,Doctor,6,6,8,
+383,Male,29,Doctor,6,6,8,
+384,Female,29,Nurse,6.5,5,7,Sleep Apnea
+385,Male,29,Doctor,6,6,8,Sleep Apnea
+386,Female,29,Nurse,6.5,5,7,Insomnia
+387,Male,30,Doctor,7.6,7,6,
+388,Male,30,Doctor,7.7,7,6,
+389,Male,30,Doctor,7.7,7,6,
+390,Male,30,Doctor,7.7,7,6,
+391,Male,30,Doctor,7.7,7,6,
+392,Male,30,Doctor,7.8,7,6,
+393,Male,30,Doctor,7.9,7,6,
+394,Male,30,Doctor,7.8,7,6,
+395,Male,30,Doctor,7.9,7,6,
+396,Male,30,Doctor,7.9,7,6,
+397,Male,30,Doctor,7.9,7,6,
+398,Female,30,Nurse,6.4,5,7,Sleep Apnea
+399,Female,30,Nurse,6.4,5,7,Insomnia
+400,Female,31,Nurse,7.9,8,4,
+401,Male,31,Doctor,6.1,6,8,
+402,Male,31,Doctor,7.7,7,6,
+403,Male,31,Doctor,6.1,6,8,
+404,Male,31,Doctor,6.1,6,8,
+405,Male,31,Doctor,7.6,7,6,
+406,Male,31,Doctor,7.6,7,6,
+407,Male,31,Doctor,7.6,7,6,
+408,Male,31,Doctor,7.7,7,6,
+409,Male,31,Doctor,7.7,7,6,
+410,Male,31,Doctor,7.7,7,6,
+411,Male,31,Doctor,7.8,7,6,
+412,Male,31,Doctor,7.7,7,6,
+413,Male,31,Doctor,7.8,7,6,
+414,Male,31,Doctor,7.7,7,6,
+415,Male,31,Doctor,7.8,7,6,
+416,Male,31,Doctor,7.7,7,6,
+417,Male,31,Doctor,7.7,7,6,Sleep Apnea
+418,Male,32,Engineer,7.5,8,3,
+419,Male,32,Engineer,7.5,8,3,
+420,Male,32,Doctor,6,6,8,
+421,Male,32,Doctor,7.6,7,6,
+422,Male,32,Doctor,6,6,8,
+423,Male,32,Doctor,6,6,8,
+424,Male,32,Doctor,7.7,7,6,
+425,Male,32,Doctor,6,6,8,
+426,Male,32,Doctor,6,6,8,
+427,Male,32,Doctor,7.7,7,6,
+428,Male,32,Doctor,6,6,8,
+429,Male,32,Doctor,6,6,8,
+430,Male,32,Doctor,6.2,6,8,
+431,Male,32,Doctor,6.2,6,8,
+432,Male,32,Doctor,6.2,6,8,
+433,Male,32,Doctor,6.2,6,8,
+434,Male,32,Accountant,7.2,8,6,
+435,Male,33,Doctor,6,6,8,Insomnia
+436,Female,33,Scientist,6.2,6,6,
+437,Female,33,Scientist,6.2,6,6,
+438,Male,33,Doctor,6.1,6,8,
+439,Male,33,Doctor,6.1,6,8,
+440,Male,33,Doctor,6.1,6,8,
+441,Male,33,Doctor,6.1,6,8,
+442,Male,33,Doctor,6,6,8,
+443,Male,33,Doctor,6,6,8,
+444,Male,33,Doctor,6,6,8,
+445,Male,33,Doctor,6,6,8,
+446,Male,33,Doctor,6,6,8,
+447,Male,33,Doctor,6,6,8,
+448,Female,34,Scientist,5.8,4,8,Sleep Apnea
+449,Female,34,Scientist,5.8,4,8,Sleep Apnea
+450,Male,35,Teacher,6.7,7,5,
+451,Male,35,Teacher,6.7,7,5,
+452,Male,35,Software Engineer,7.5,8,5,
+453,Female,35,Accountant,7.2,8,4,
+454,Male,35,Engineer,7.2,8,4,
+455,Male,35,Engineer,7.2,8,4,
+456,Male,35,Engineer,7.3,8,4,
+457,Male,35,Engineer,7.3,8,4,
+458,Male,35,Engineer,7.3,8,4,
+459,Male,35,Engineer,7.3,8,4,
+460,Male,35,Software Engineer,7.5,8,5,
+461,Male,35,Lawyer,7.4,7,5,Sleep Apnea
+462,Female,36,Accountant,7.2,8,4,Insomnia
+463,Female,36,Accountant,7.1,8,4,
+464,Female,36,Accountant,7.2,8,4,
+465,Female,36,Accountant,7.1,8,4,
+466,Female,36,Teacher,7.1,8,4,
+467,Female,36,Teacher,7.1,8,4,
+468,Female,36,Teacher,7.2,8,4,
+469,Female,36,Teacher,7.2,8,4,
+470,Female,36,Teacher,7.2,8,4,
+471,Male,36,Teacher,6.6,5,7,Sleep Apnea
+472,Female,36,Teacher,7.2,8,4,Sleep Apnea
+473,Male,36,Teacher,6.6,5,7,Insomnia
+474,Female,37,Nurse,6.1,6,6,
+475,Male,37,Engineer,7.8,8,4,
+476,Male,37,Engineer,7.8,8,4,
+477,Male,37,Lawyer,7.4,8,5,
+478,Female,37,Accountant,7.2,8,4,
+479,Male,37,Lawyer,7.4,8,5,
+480,Female,37,Accountant,7.2,8,4,
+481,Male,37,Lawyer,7.4,8,5,
+482,Female,37,Accountant,7.2,8,4,
+483,Female,37,Accountant,7.2,8,4,
+484,Female,37,Accountant,7.2,8,4,
+485,Female,37,Accountant,7.2,8,4,
+486,Female,37,Accountant,7.2,8,4,
+487,Female,37,Accountant,7.2,8,4,
+488,Female,37,Accountant,7.2,8,4,
+489,Female,37,Accountant,7.2,8,4,
+490,Female,37,Accountant,7.2,8,4,
+491,Female,37,Accountant,7.2,8,4,
+492,Female,37,Accountant,7.2,8,4,
+493,Female,37,Nurse,7.5,8,4,
+494,Male,38,Lawyer,7.3,8,5,
+495,Female,38,Accountant,7.1,8,4,
+496,Male,38,Lawyer,7.3,8,5,
+497,Male,38,Lawyer,7.3,8,5,
+498,Female,38,Accountant,7.1,8,4,
+499,Male,38,Lawyer,7.3,8,5,
+500,Male,38,Lawyer,7.3,8,5,
+501,Female,38,Accountant,7.1,8,4,
+502,Male,38,Lawyer,7.3,8,5,
+503,Male,38,Lawyer,7.3,8,5,
+504,Female,38,Accountant,7.1,8,4,
+505,Male,38,Lawyer,7.1,8,5,
+506,Female,38,Accountant,7.1,8,4,
+507,Male,38,Lawyer,7.1,8,5,
+508,Female,38,Accountant,7.1,8,4,
+509,Male,38,Lawyer,7.1,8,5,
+510,Female,38,Accountant,7.1,8,4,
+511,Female,38,Accountant,7.1,8,4,
+512,Male,38,Lawyer,7.1,8,5,Sleep Apnea
+513,Female,38,Lawyer,7.4,7,5,Sleep Apnea
+514,Male,39,Lawyer,7.2,8,5,Insomnia
+515,Male,39,Engineer,6.5,5,7,Insomnia
+516,Female,39,Lawyer,6.9,7,6,
+517,Female,39,Accountant,8,9,3,
+518,Female,39,Accountant,8,9,3,
+519,Male,39,Lawyer,7.2,8,5,
+520,Male,39,Lawyer,7.2,8,5,
+521,Male,39,Lawyer,7.2,8,5,
+522,Male,39,Lawyer,7.2,8,5,
+523,Male,39,Lawyer,7.2,8,5,
+524,Male,39,Lawyer,7.2,8,5,
+525,Male,39,Lawyer,7.2,8,5,
+526,Male,39,Lawyer,7.2,8,5,
+527,Male,39,Lawyer,7.2,8,5,
+528,Male,39,Lawyer,7.2,8,5,
+529,Female,40,Accountant,7.2,8,6,
+530,Female,40,Accountant,7.2,8,6,
+531,Male,40,Lawyer,7.9,8,5,
+532,Male,40,Lawyer,7.9,8,5,
+533,Male,41,Lawyer,7.6,8,5,Insomnia
+534,Male,41,Engineer,7.3,8,6,
+535,Male,41,Lawyer,7.1,7,6,
+536,Male,41,Lawyer,7.1,7,6,
+537,Male,41,Lawyer,7.7,8,5,
+538,Male,41,Lawyer,7.7,8,5,
+539,Male,41,Lawyer,7.7,8,5,
+540,Male,41,Lawyer,7.7,8,5,
+541,Male,41,Lawyer,7.7,8,5,
+542,Male,41,Lawyer,7.6,8,5,
+543,Male,41,Lawyer,7.6,8,5,
+544,Male,41,Lawyer,7.6,8,5,
+545,Male,42,Salesperson,6.5,6,7,Insomnia
+546,Male,42,Lawyer,7.8,8,5,
+547,Male,42,Lawyer,7.8,8,5,
+548,Male,42,Lawyer,7.8,8,5,
+549,Male,42,Lawyer,7.8,8,5,
+550,Male,42,Lawyer,7.8,8,5,
+551,Male,42,Lawyer,7.8,8,5,
+552,Female,42,Teacher,6.8,6,7,Sleep Apnea
+553,Female,42,Teacher,6.8,6,7,Sleep Apnea
+554,Female,43,Teacher,6.7,7,4,Insomnia
+555,Male,43,Salesperson,6.3,6,7,Insomnia
+556,Female,43,Teacher,6.7,7,4,Insomnia
+557,Male,43,Salesperson,6.5,6,7,Insomnia
+558,Female,43,Teacher,6.7,7,4,Insomnia
+559,Male,43,Salesperson,6.4,6,7,Insomnia
+560,Male,43,Salesperson,6.5,6,7,Insomnia
