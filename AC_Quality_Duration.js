@@ -22,7 +22,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
 
     // Define y scale
     let y = d3.scaleLinear()
-        .domain([0, d3.max(groupedData, d => d.QualityofSleep)])
+        .domain([d3.min(groupedData, d => d.QualityofSleep), d3.max(groupedData, d => d.QualityofSleep)])
         .range([height - marginBottom, marginTop]);
 
     // Create the SVG container.
