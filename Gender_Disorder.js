@@ -6,7 +6,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
     
                 // Group and summarize data by Gender and SleepDisorder
                 let groupedData = Array.from(
-                    d3.rollups(data, v => v.length, d => d.SleepDisorder, d => d.Gender),
+                    d3.rollups(data, v => v.length, d => d.SleepDisorder || "N/A", d => d.Gender),
                     ([SleepDisorder, Genders]) => ({
                         SleepDisorder,
                         Genders: Genders.map(([Gender, Count]) => ({ Gender, Count }))
