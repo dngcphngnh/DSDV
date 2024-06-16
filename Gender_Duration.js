@@ -13,7 +13,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
 
     let width = 928;
     let height = 600;
-    let marginTop = 20;
+    let marginTop = 40;
     let marginRight = 20;
     let marginBottom = 30;
     let marginLeft = 30;
@@ -34,6 +34,15 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .attr("height", height)
         .attr("viewBox", [0, 0, width, height])
         .attr("style", "max-width: 100%; height: auto; overflow: visible; font: 10px sans-serif;");
+
+    // Add the title.
+    svg.append("text")
+        .attr("x", (width - marginLeft - marginRight) / 2 + marginLeft)
+        .attr("y", marginTop - 10)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "16px")
+        .attr("font-weight", "bold")
+        .text("Sleep Duration vs Number of People by Gender");
 
     // Add the horizontal axis.
     svg.append("g")
@@ -82,7 +91,17 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .attr("stroke-linecap", "round")
         .attr("d", d => line(d.values));
 
-    // Draw the scatter plot
+    // Add a tooltip element
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0)
+        .style("position", "absolute")
+        .style("background", "#fff")
+        .style("border", "1px solid #ccc")
+        .style("padding", "5px")
+        .style("border-radius", "5px");
+
+    // Draw the scatter plot with interactions
     groupedData.forEach(genderGroup => {
         svg.selectAll(`.dot-${genderGroup.Gender}`)
             .data(genderGroup.values)
@@ -93,58 +112,44 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
             .attr("r", 5)
             .attr("fill", color(genderGroup.Gender))
             .attr("stroke", "white")
-            .attr("stroke-width", 1);
+            .attr("stroke-width", 1)
+            .on("mouseover", function(event, d) {
+                d3.select(this).attr("r", 7);
+                tooltip.transition().duration(200).style("opacity", 1);
+                tooltip.html(`Gender: ${genderGroup.Gender}<br>Sleep Duration: ${d.SleepDuration}<br>Count: ${d.Count}`)
+                    .style("left", (event.pageX + 5) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mousemove", function(event) {
+                tooltip.style("left", (event.pageX + 5) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("r", 5);
+                tooltip.transition().duration(500).style("opacity", 0);
+            });
+    });
 
-    // Add a tooltip element
-    const tooltip = d3.select("body").append("div")
-    .attr("class", "tooltip");
+    // Add legend
+    const legend = svg.append("g")
+        .attr("transform", `translate(${width - marginRight - 100}, ${marginTop})`);
 
-// Draw the scatter plot with interactions
-groupedData.forEach(genderGroup => {
-    svg.selectAll(`.dot-${genderGroup.Gender}`)
-        .data(genderGroup.values)
-        .join("circle")
-        .attr("class", `dot-${genderGroup.Gender}`)
-        .attr("cx", d => x(d.SleepDuration))
-        .attr("cy", d => y(d.Count))
-        .attr("r", 5)
-        .attr("fill", color(genderGroup.Gender))
-        .attr("stroke", "white")
-        .attr("stroke-width", 1)
-        .on("mouseover", function(event, d) {
-            d3.select(this).attr("r", 7);
-            tooltip.transition().duration(200).style("opacity", 1);
-            tooltip.html(`Gender: ${genderGroup.Gender}<br>Sleep Duration: ${d.SleepDuration}<br>Count: ${d.Count}`)
-                .style("left", (event.pageX + 5) + "px")
-                .style("top", (event.pageY - 28) + "px");
-        })
-        .on("mousemove", function(event) {
-            tooltip.style("left", (event.pageX + 5) + "px")
-                .style("top", (event.pageY - 28) + "px");
-        })
-        .on("mouseout", function() {
-            d3.select(this).attr("r", 5);
-            tooltip.transition().duration(500).style("opacity", 0);
-        });
+    groupedData.forEach((d, i) => {
+        const legendRow = legend.append("g")
+            .attr("transform", `translate(0, ${i * 20})`);
+
+        legendRow.append("rect")
+            .attr("width", 10)
+            .attr("height", 10)
+            .attr("fill", color(d.Gender));
+
+        legendRow.append("text")
+            .attr("x", 20)
+            .attr("y", 10)
+            .attr("text-anchor", "start")
+            .attr("font-size", "12px")
+            .text(d.Gender);
+    });
 }).catch(function(error) {
     console.log(error);
-})
-})
 });
-
-/*<style>
-.tooltip {
-    position: absolute;
-    text-align: center;
-    width: 100px;
-    height: auto;
-    padding: 5px;
-    font: 12px sans-serif;
-    background: lightsteelblue;
-    border: 1px solid gray;
-    border-radius: 8px;
-    pointer-events: none;
-    opacity: 0;
-}
-</style>
-*/
