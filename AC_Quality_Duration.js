@@ -56,7 +56,18 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
             .attr("y", 10)
             .attr("fill", "currentColor")
             .attr("text-anchor", "start")
-            .text("↑ Quality of Sleep"));
+            .text("↑ Mean Quality of Sleep"));
+
+    // Add a tooltip element
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("background", "white")
+        .style("padding", "5px")
+        .style("border", "1px solid black")
+        .style("border-radius", "5px")
+        .style("pointer-events", "none")
+        .style("opacity", 0);
 
     // Add the scatter plot points with interactivity.
     svg.selectAll("circle")
@@ -65,24 +76,21 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .attr("cx", d => x(d.SleepDuration))
         .attr("cy", d => y(d.QualityofSleep))
         .attr("r", 5)
-        .attr("fill", "steelblue")
+        .attr("fill", "#00b4d8")
         .on("mouseover", function(event, d) {
-            d3.select(this)
-                .attr("r", 6)
-                .attr("fill", "orange");
-
-            svg.append("text")
-                .attr("id", "tooltip")
-                .attr("x", x(d.SleepDuration) + 5)
-                .attr("y", y(d.QualityofSleep) - 5)
-                .text(`Sleep Duration: ${d.SleepDuration}, Quality: ${d.QualityofSleep.toFixed(2)}`);
+            d3.select(this).attr("r", 7).attr("fill", "#03045e");
+            tooltip.transition().duration(200).style("opacity", 1);
+            tooltip.html(`Quality of Sleep: ${d.QualityofSleep.toFixed(2)}<br>Sleep Duration: ${d.SleepDuration}`)
+                .style("left", (event.pageX + 5) + "px")
+                .style("top", (event.pageY - 28) + "px");
         })
-        .on("mouseout", function(d) {
-            d3.select(this)
-                .attr("r", 5)
-                .attr("fill", "steelblue");
-
-            svg.select("#tooltip").remove();
+        .on("mousemove", function(event) {
+            tooltip.style("left", (event.pageX + 5) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mouseout", function() {
+            d3.select(this).attr("r", 5).attr("fill", "#00b4d8");
+            tooltip.transition().duration(200).style("opacity", 0);
         });
 
 }).catch(function(error) {
