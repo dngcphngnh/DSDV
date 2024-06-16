@@ -60,6 +60,19 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
             .attr("text-anchor", "start")
             .text("↑ Mean Quality of Sleep"));
 
+    // Define the line generator
+    let line = d3.line()
+        .x(d => x(d.SleepDuration))
+        .y(d => y(d.QualityofSleep));
+
+    // Add the line path
+    svg.append("path")
+        .datum(groupedData)
+        .attr("fill", "none")
+        .attr("stroke", "#00b4d8")
+        .attr("stroke-width", 1.5)
+        .attr("d", line);
+
     // Add a tooltip element
     const tooltip = d3.select("body").append("div")
         .attr("class", "tooltip")
