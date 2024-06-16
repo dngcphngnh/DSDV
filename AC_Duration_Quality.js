@@ -8,6 +8,8 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         })
     );
 
+    groupedData.sort((a, b) => a.SleepDuration - b.SleepDuration);
+
     let width = 928;
     let height = 600;
     let marginTop = 20;
