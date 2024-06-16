@@ -57,6 +57,34 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .attr("y", d => y(d.MeanStressLevel))
         .attr("height", d => y(0) - y(d.MeanStressLevel))
         .attr("width", x.bandwidth());
+        .on("mouseover", function(event, d) {
+            d3.select(this).attr("fill", "#03045e");
+            tooltip.transition().duration(200).style("opacity", 1);
+            tooltip.html(`Age: ${d.Age}<br>Mean Stress Level: ${d.MeanStressLevel}`)
+                .style("left", (event.pageX + 5) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mousemove", function(event) {
+            tooltip.style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 20) + "px");
+        })
+        .on("mouseout", function() {
+            d3.select(this).attr("fill", "steelblue");
+            tooltip.transition().duration(200).style("opacity", 0);
+        });
+
+        const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("text-align", "center")
+        .style("width", "120px")
+        .style("height", "55px")
+        .style("padding", "2px")
+        .style("background", "white")
+        .style("border", "0px")
+        .style("border-radius", "8px")
+        .style("pointer-events", "none")
+        .style("opacity", 0);
 
     // Append the axes.
     svg.append("g")
