@@ -77,7 +77,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
     svg.append("path")
         .datum(groupedData)
         .attr("fill", "none")
-        .attr("stroke", "#3d606e")
+        .attr("stroke", "#298c8c")
         .attr("stroke-width", 1.5)
         .attr("d", line);
  
@@ -98,9 +98,9 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .attr("cx", d => x(d.QualityofSleep))
         .attr("cy", d => y(d.SleepDuration))
         .attr("r", 5)
-        .attr("fill", "#3d606e")
+        .attr("fill", "#298c8c")
         .on("mouseover", function(event, d) {
-            d3.select(this).attr("r", 7).attr("fill", "#3d606e");
+            d3.select(this).attr("r", 7).attr("fill", "#8b8b8b");
             tooltip.transition().duration(200).style("opacity", 1);
             tooltip.html(`Quality of Sleep: ${d.QualityofSleep}<br>Mean Sleep Duration: ${d.SleepDuration}`)
                 .style("left", (event.pageX + 5) + "px")
@@ -111,7 +111,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
                 .style("top", (event.pageY - 28) + "px");
         })
         .on("mouseout", function() {
-            d3.select(this).attr("r", 5).attr("fill", "#3d606e");
+            d3.select(this).attr("r", 5).attr("fill", "#298c8c");
             tooltip.transition().duration(200).style("opacity", 0);
         });
  
