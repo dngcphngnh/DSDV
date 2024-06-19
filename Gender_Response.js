@@ -1,4 +1,4 @@
-d3.csv("Data.csv").then(function(data) {
+d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(function(data) {
     // Convert the Count field to a number
     data.forEach(d => d.Count = +d.Count);
 
@@ -7,13 +7,13 @@ d3.csv("Data.csv").then(function(data) {
                       .map(d => ({ Gender: d[0], Count: d[1] }));
 
     // Set up the chart dimensions
-    let width = 928;
+    let width = 1000;
     let height = Math.min(width, 500);
 
     // Create the color scale
     let color = d3.scaleOrdinal()
        .domain(nestedData.map(d => d.Gender))
-       .range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), nestedData.length).reverse());
+       .range(["#30535f", "#09191f"]);
 
     // Create the pie layout and arc generator
     let pie = d3.pie()
@@ -22,7 +22,7 @@ d3.csv("Data.csv").then(function(data) {
 
     let arc = d3.arc()
        .innerRadius(0)
-       .outerRadius(Math.min(width, height) / 2 - 1);
+       .outerRadius(Math.min(width, 450) / 2 - 1);
 
     let labelRadius = Math.min(width, height) / 2 * 0.8;
 
@@ -35,36 +35,68 @@ d3.csv("Data.csv").then(function(data) {
     let svg = d3.select("body").append("svg")
        .attr("width", width)
        .attr("height", height)
-       .attr("viewBox", [-width / 2, -height / 2, width, height])
-       .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;");
+       .attr("viewBox", [-width / 2, -height / 2, width, height]);
+
+    // Create tooltip
+    const tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("position", "absolute")
+      .style("width", "120px")
+      .style("height", "38px")
+      .style("padding", "2px")
+      .style("font-size", "16px")
+      .style("background", "white")
+      .style("border", "1px solid #ccc")
+      .style("pointer-events", "none")
+      .style("opacity", 0);
 
     // Add a sector path for each value
     svg.append("g")
-       .attr("stroke", "white")
-       .selectAll("path")
-       .data(pie(nestedData))
-       .join("path")
-       .attr("fill", d => color(d.data.Gender))
-       .attr("d", arc)
-       .append("title")
-       .text(d => `${d.data.Gender}: ${d.data.Count}`);
+      .attr("stroke", "white")
+      .selectAll("path")
+      .data(pie(nestedData))
+      .join("path")
+      .attr("fill", d => color(d.data.Gender))
+      .attr("d", arc)
+      .on("mouseover", function(event, d) {
+        d3.select(this).transition().duration(200).attr("transform", "scale(1.1)");
+        tooltip.transition().duration(200).style("opacity", 0.9);
+        tooltip.html(`Gender: ${d.data.Gender}<br>Count: ${d.data.Count}`)
+          .style("left", `${event.pageX + 5}px`)
+          .style("top", `${event.pageY - 28}px`);
+      })
+      .on("mousemove", function(event) {
+        tooltip.style("left", `${event.pageX + 5}px`)
+          .style("top", `${event.pageY - 28}px`);
+      })
+      .on("mouseout", function() {
+        d3.select(this).transition().duration(200).attr("transform", "scale(1)");
+        tooltip.transition().duration(200).style("opacity", 0);
+      });
 
-    // Add labels
-    svg.append("g")
-       .attr("text-anchor", "middle")
-       .selectAll("text")
-       .data(pie(nestedData))
-       .join("text")
-       .attr("transform", d => `translate(${arcLabel.centroid(d)})`)
-       .call(text => text.append("tspan")
-           .attr("y", "-0.4em")
-           .attr("font-weight", "bold")
-           .text(d => d.data.Gender))
-       .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
-           .attr("x", 0)
-           .attr("y", "0.7em")
-           .attr("fill-opacity", 0.7)
-           .text(d => d.data.Count));
+    // Add legend
+    let legend = svg.append("g")
+        .attr("transform", `translate(${width / 2 - 260},${-height / 2 + 50})`)
+        .attr("font-size", 12)
+        .attr("text-anchor", "start")
+        .selectAll("g")
+        .data(nestedData)
+        .join("g")
+        .attr("transform", (d, i) => `translate(0, ${i * 50})`);
+
+    legend.append("rect")
+        .attr("x", 30)
+        .attr("width", 30)
+        .attr("height", 30)
+        .attr("fill", d => color(d.Gender));
+
+    legend.append("text")
+        .attr("x", 80)
+        .attr("y", 14)
+        .attr("dy", "0.35em")
+        .attr("font-size", "20px")
+        .text(d => d.Gender);
+
 }).catch(function(error){
     console.log(error);
 });
