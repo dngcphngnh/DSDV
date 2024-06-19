@@ -4,7 +4,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         d3.rollup(
             data,
             v => {
-                const meanStressLevel = d3.mean(v, d => +d.StressLevel);
+                const meanStressLevel = d3.mean(v, d => +d.StressLevel).toFixed(2);
                 return meanStressLevel;
             },
             d => d.Age
@@ -14,6 +14,18 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
             MeanStressLevel: MeanStressLevel
         })
     );
+
+
+    if (!ageStressData.some(d => d.Age === 46)) {
+        ageStressData.push({ Age: 46, Count: 0 });
+    }
+    
+    // Ensure there's an entry for Age 47 with count 0 if missing
+    if (!ageStressData.some(d => d.Age === 47)) {
+        ageStressData.push({ Age: 47, Count: 0 });
+    }
+
+    ageStressData.sort((a, b) => a.Age - b.Age);
 
     // Specify the chart’s dimensions.
     const width = 1000;
@@ -49,16 +61,16 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
     // Append the bars.
     svg.append("g")
         .attr("class", "bars")
-        .attr("fill", "steelblue")
+        .attr("fill", "#3d606e")
         .selectAll("rect")
         .data(ageStressData)
         .join("rect")
         .attr("x", d => x(d.Age))
         .attr("y", d => y(d.MeanStressLevel))
         .attr("height", d => y(0) - y(d.MeanStressLevel))
-        .attr("width", x.bandwidth());
+        .attr("width", x.bandwidth())
         .on("mouseover", function(event, d) {
-            d3.select(this).attr("fill", "#03045e");
+            d3.select(this).attr("fill", "#153b47");
             tooltip.transition().duration(200).style("opacity", 1);
             tooltip.html(`Age: ${d.Age}<br>Mean Stress Level: ${d.MeanStressLevel}`)
                 .style("left", (event.pageX + 5) + "px")
@@ -69,7 +81,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
                 .style("top", (event.pageY - 20) + "px");
         })
         .on("mouseout", function() {
-            d3.select(this).attr("fill", "steelblue");
+            d3.select(this).attr("fill", "#3d606e");
             tooltip.transition().duration(200).style("opacity", 0);
         });
 
@@ -81,8 +93,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .style("height", "55px")
         .style("padding", "2px")
         .style("background", "white")
-        .style("border", "0px")
-        .style("border-radius", "8px")
+        .style("border", "1px solid #ccc")
         .style("pointer-events", "none")
         .style("opacity", 0);
 
@@ -91,25 +102,29 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .attr("class", "x-axis")
         .attr("transform", `translate(0,${height - marginBottom})`)
         .call(xAxis)
+        .call(g => g.selectAll("text").style("font-size", "12px"))
       .append("text")
         .attr("x", (width - marginLeft - marginRight) / 2 + marginLeft)
         .attr("y", marginBottom - 10)
         .attr("fill", "black")
         .attr("text-anchor", "middle")
-        .text("Age");
+        .text("Age")
+        .style("font-size", "20px");
 
     svg.append("g")
         .attr("class", "y-axis")
         .attr("transform", `translate(${marginLeft},0)`)
         .call(yAxis)
         .call(g => g.select(".domain").remove())
+      .call(g => g.selectAll("text").style("font-size", "12px"))
       .append("text")
-        .attr("x", -marginLeft / 2)
-        .attr("y", marginTop - 10)
+      .attr("x", -marginLeft - 130)
+      .attr("y", marginTop - 3)
         .attr("fill", "black")
         .attr("text-anchor", "middle")
         .attr("transform", `rotate(-90, -${marginLeft / 2}, ${marginTop - 10})`)
-        .text("Level");
+        .text("Mean Stress Level")
+        .style("font-size", "20px");
 
     return svg.node();
 
