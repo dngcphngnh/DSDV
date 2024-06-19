@@ -1,149 +1,156 @@
 d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(function(data) {
-    // Group and summarize data
-    let groupedData = Array.from(
-        d3.rollup(data, v => v.length, d => d.Gender, d => d.SleepDuration),
-        ([Gender, sleepData]) => ({
-            Gender,
-            values: Array.from(sleepData, ([SleepDuration, Count]) => ({ SleepDuration: +SleepDuration, Count }))
-                .sort((a, b) => a.SleepDuration - b.SleepDuration) // Sort by SleepDuration
-        })
-    );
+  // Convert Count values to numbers and extract StressLevel and Gender
+  data.forEach(d => {
+      d.Count = +d.Count; // Assuming there's a Count field that needs conversion
+  });
 
-    console.log(groupedData); // Check the transformed data structure
+  // Group and summarize data by StressLevel and Gender
+  let groupedData = Array.from(
+      d3.rollups(data, v => v.length, d => d.SleepDuration, d => d.Gender),
+      ([SleepDuration, Genders]) => ({
+          SleepDuration,
+          Genders: Genders.map(([Gender, Count]) => ({ Gender, Count }))
+      })
+  );
 
-    let width = 1000;
-    let height = 600;
-    let marginTop = 40;
-    let marginRight = 10;
-    let marginBottom = 60;
-    let marginLeft = 150;
+  console.log(groupedData); // Check the transformed data structure
 
-    let x = d3.scaleLinear()
-        .domain([d3.min(groupedData, d => d3.min(d.values, v => v.SleepDuration)),d3.max(groupedData, d => d3.max(d.values, v => v.SleepDuration))]).nice()
-        .range([marginLeft, width - marginRight]);
+  groupedData.sort((a, b) => a.SleepDuration - b.SleepDuration);
 
-    let y = d3.scaleLinear()
-        .domain([0, d3.max(groupedData, d => d3.max(d.values, v => v.Count))]).nice()
-        .range([height - marginBottom, marginTop]);
+  // Specify the chart’s dimensions.
+  let width = 1000;
+  let height = 500;
+  let marginTop = 40;
+  let marginRight = 10;
+  let marginBottom = 60;
+  let marginLeft = 150;
 
-    let svg = d3.select("body").append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .attr("viewBox", [0, 0, width, height]);
+  // Declare the x (horizontal position) scale and the corresponding axis generator.
+  let x0 = d3.scaleBand()
+      .domain(groupedData.map(d => d.SleepDuration))
+      .range([marginLeft, width - marginRight])
+      .padding(0.1);
 
-    // Add the horizontal axis.
-    svg.append("g")
-        .attr("transform", `translate(0,${height - marginBottom})`)
-        .call(d3.axisBottom(x).ticks(8).tickSizeOuter(0))
-        .call(g => g.selectAll("text").style("font-size", "12px"))
-        .append("text")
-        .attr("x", (width - marginLeft - marginRight) / 2 + marginLeft)
-        .attr("y", marginBottom - 5)
-        .attr("fill", "black")
-        .attr("text-anchor", "middle")
-        .text("Age")
-        .style("font-size", "20px")
-        .text("Sleep Duration");
+  let x1 = d3.scaleBand()
+      .domain([...new Set(data.map(d => d.Gender))])
+      .range([0, x0.bandwidth()])
+      .padding(0.05);
 
-    // Add the vertical axis.
-    svg.append("g")
-        .attr("transform", `translate(${marginLeft},0)`)
-        .call(d3.axisLeft(y))
-        .call(g => g.select(".domain").remove())
-        .call(g => g.selectAll(".tick line").clone()
-            .attr("x2", width - marginLeft - marginRight)
-            .attr("stroke-opacity", 0.1))
-        .call(g => g.selectAll("text").style("font-size", "12px"))
-        .append("text")
-        .attr("transform", `rotate(-90, -${marginLeft / 2}, ${marginTop - 10})`)
-        .attr("x", -marginLeft - 150)
-        .attr("y", marginTop - 3)
-        .attr("fill", "black")
-        .text("Mean Sleep Duration")
-        .attr("text-anchor", "middle")
-        .style("font-size", "20px")
-        .text("Number of People");
+  let xAxis = d3.axisBottom(x0).tickSizeOuter(0);
 
-    // Create a color scale for the genders
-    const color = d3.scaleOrdinal()
-        .domain(groupedData.map(d => d.Gender))
-        .range(["#3d606e", "#09191f"]);
+  // Declare the y (vertical position) scale.
+  let y = d3.scaleLinear()
+      .domain([0, d3.max(groupedData, d => d3.max(d.Genders, s => s.Count))])
+      .nice()
+      .range([height - marginBottom, marginTop]);
 
-    // Create a line generator function
-    const line = d3.line()
-        .x(d => x(d.SleepDuration))
-        .y(d => y(d.Count));
+  // Define a color scale
+  let color = d3.scaleOrdinal()
+      .domain([...new Set(data.map(d => d.Gender))])
+      .range(["#298c8c", "#a00000"]);
 
-    // Draw the lines
-    svg.selectAll(".line")
-        .data(groupedData)
-        .join("path")
-        .attr("fill", "none")
-        .attr("stroke", d => color(d.Gender))
-        .attr("stroke-width", 1.5)
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("d", d => line(d.values));
+  // Create the SVG container.
+  let svg = d3.select("body").append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", [0, 0, width, height]);
 
-    // Add a tooltip element
-    const tooltip = d3.select("body").append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 0)
-        .style("position", "absolute")
-        .style("background", "#fff")
-        .style("border", "1px solid #ccc")
-        .style("padding", "5px")
-        .style("border-radius", "5px");
+  // Create a tooltip div that is hidden by default
+  const tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("position", "absolute")
+      .style("width", "110px")
+      .style("height", "35px")
+      .style("padding", "5px")
+      .style("background", "white")
+      .style("border", "1px solid #ccc")
+      .style("pointer-events", "none")
+      .style("opacity", 0);
 
-    // Draw the scatter plot with interactions
-    groupedData.forEach(genderGroup => {
-        svg.selectAll(`.dot-${genderGroup.Gender}`)
-            .data(genderGroup.values)
-            .join("circle")
-            .attr("class", `dot-${genderGroup.Gender}`)
-            .attr("cx", d => x(d.SleepDuration))
-            .attr("cy", d => y(d.Count))
-            .attr("r", 5)
-            .attr("fill", color(genderGroup.Gender))
-            .attr("stroke", "white")
-            .attr("stroke-width", 1)
-            .on("mouseover", function(event, d) {
-                d3.select(this).attr("r", 7);
-                tooltip.transition().duration(200).style("opacity", 1);
-                tooltip.html(`Gender: ${genderGroup.Gender}<br>Sleep Duration: ${d.SleepDuration}<br>Count: ${d.Count}`)
-                    .style("left", (event.pageX + 5) + "px")
-                    .style("top", (event.pageY - 28) + "px");
-            })
-            .on("mousemove", function(event) {
-                tooltip.style("left", (event.pageX + 5) + "px")
-                    .style("top", (event.pageY - 28) + "px");
-            })
-            .on("mouseout", function() {
-                d3.select(this).attr("r", 5);
-                tooltip.transition().duration(500).style("opacity", 0);
-            });
-    });
+  // Create a group for each StressLevel and then create a bar for each Gender within that group.
+  svg.append("g")
+      .selectAll("g")
+      .data(groupedData)
+      .join("g")
+      .attr("transform", d => `translate(${x0(d.SleepDuration)},0)`)
+      .selectAll("rect")
+      .data(d => d.Genders)
+      .join("rect")
+      .attr("x", d => x1(d.Gender))
+      .attr("y", d => y(d.Count))
+      .attr("height", d => y(0) - y(d.Count))
+      .attr("width", x1.bandwidth())
+      .attr("fill", d => color(d.Gender))
+      .on("mouseover", function(event, d) {
+          d3.select(this).attr("fill", "#b8b8b8");
+          tooltip.transition().duration(200).style("opacity", 1);
+          tooltip.html(`Gender: ${d.Gender}<br>Count: ${d.Count}`)
+              .style("left", (event.pageX + 5) + "px")
+              .style("top", (event.pageY - 28) + "px");
+      })
+      .on("mousemove", function(event) {
+          tooltip.style("left", (event.pageX + 10) + "px")
+              .style("top", (event.pageY - 20) + "px");
+      })
+      .on("mouseout", function() {
+          d3.select(this).attr("fill", d => color(d.Gender));
+          tooltip.transition().duration(200).style("opacity", 0);
+      });
 
-    // Add legend
-    const legend = svg.append("g")
-        .attr("transform", `translate(${width - marginRight - 150}, ${marginTop})`);
+  // Create the axes.
+  svg.append("g")
+      .attr("transform", `translate(0,${height - marginBottom})`)
+      .call(xAxis)
+      .call(g => g.selectAll("text").style("font-size", "12px"))
+      .append("text")
+      .attr("x", (width - marginLeft - marginRight) / 2 + marginLeft)
+      .attr("y", marginBottom - 5)
+      .attr("fill", "black")
+      .attr("text-anchor", "middle")
+      .text("Sleep Duration")
+      .style("font-size", "20px");
 
-    groupedData.forEach((d, i) => {
-        const legendRow = legend.append("g")
-            .attr("transform", `translate(0, ${i * 40})`);
+  svg.append("g")
+      .attr("transform", `translate(${marginLeft},0)`)
+      .call(d3.axisLeft(y))
+      .call(g => g.select(".domain").remove())
+      .call(g => g.selectAll(".tick line").clone()
+          .attr("x2", width - marginLeft - marginRight)
+          .attr("stroke-opacity", 0.1))
+      .call(g => g.selectAll("text").style("font-size", "12px"))
+      .append("text")
+      .attr("transform", `rotate(-90, -${marginLeft / 2}, ${marginTop - 10})`)
+      .attr("x", -marginLeft - 140)
+      .attr("y", marginTop - 3)
+      .attr("fill", "black")
+      .attr("text-anchor", "middle")
+      .text("Number of People")
+      .style("font-size", "20px");
 
-        legendRow.append("rect")
-            .attr("width", 30)
-            .attr("height", 30)
-            .attr("fill", color(d.Gender));
+  // Create the legend.
+  const legend = svg.append("g")
+      .attr("transform", `translate(${width - marginRight - 210}, ${marginTop})`);
 
-        legendRow.append("text")
-            .attr("x", 50)
-            .attr("y", 20)
-            .attr("text-anchor", "start")
-            .attr("font-size", "18px")
-            .text(d.Gender);
-    });
-}).catch(function(error) {
-    console.log(error);
+  const genders = [...new Set(data.map(d => d.Gender))];
+  genders.forEach((gender, i) => {
+      const legendRow = legend.append("g")
+          .attr("transform", `translate(0, ${i * 50})`);
+
+      legendRow.append("rect")
+          .attr("width", 30)
+          .attr("height", 30)
+          .attr("fill", color(gender));
+
+      legendRow.append("text")
+          .attr("x", 40)
+          .attr("y", 15)
+          .attr("dy", "0.32em")
+          .attr("text-anchor", "start")
+          .style("font-size", "18px")
+          .text(gender);
+  });
+
+})
+.catch(function(error) {
+  console.log(error);
 });
