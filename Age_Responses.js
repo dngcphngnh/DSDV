@@ -1,4 +1,3 @@
-
 d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(function(data) {
     // Group and summarize data
     let groupedData = Array.from(
@@ -53,7 +52,7 @@ if (!groupedData.some(d => d.Age === 47)) {
         .attr("x", d => x(d.Age))
         .attr("y", d => y(d.Count))
         .attr("height", d => y(0) - y(d.Count))
-        .attr("width", 25)
+        .attr("width", 20)
         .on("mouseover", function(event, d) {
             d3.select(this).attr("fill", "#153b47");
             tooltip.transition().duration(200).style("opacity", 1);
@@ -98,16 +97,15 @@ if (!groupedData.some(d => d.Age === 47)) {
         .style("font-size", "20px");
 
     // Create a tooltip div that is hidden by default
-        const tooltip = d3.select("body").append("div")
-        .attr("class", "tooltip")
-        .style("position", "absolute")
-        .style("text-align", "center")
-        .style("width", "120px")
-        .style("height", "35px")
-        .style("padding", "0px")
-        .style("font-size", "16px")
-        .style("background", "white")
-        .style("border", "1px solid #ccc")
-        .style("pointer-events", "none")
-        .style("opacity", 0);
+    const tooltip = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("position", "absolute")
+    .style("width", "70px")
+    .style("height", "35px")
+    .style("padding", "5px")
+    .style("background", "white")
+    .style("border", "1px solid #ccc")
+    .style("pointer-events", "none")
+    .style("opacity", 0);
+
 });
