@@ -61,16 +61,16 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
     // Append the bars.
     svg.append("g")
         .attr("class", "bars")
-        .attr("fill", "#3d606e")
+        .attr("fill", "#298c8c")
         .selectAll("rect")
         .data(ageStressData)
         .join("rect")
         .attr("x", d => x(d.Age))
         .attr("y", d => y(d.MeanStressLevel))
         .attr("height", d => y(0) - y(d.MeanStressLevel))
-        .attr("width", x.bandwidth())
+        .attr("width", 20)
         .on("mouseover", function(event, d) {
-            d3.select(this).attr("fill", "#153b47");
+            d3.select(this).attr("fill", "#8b8b8b");
             tooltip.transition().duration(200).style("opacity", 1);
             tooltip.html(`Age: ${d.Age}<br>Mean Stress Level: ${d.MeanStressLevel}`)
                 .style("left", (event.pageX + 5) + "px")
@@ -81,7 +81,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
                 .style("top", (event.pageY - 20) + "px");
         })
         .on("mouseout", function() {
-            d3.select(this).attr("fill", "#3d606e");
+            d3.select(this).attr("fill", "#298c8c");
             tooltip.transition().duration(200).style("opacity", 0);
         });
 
@@ -116,6 +116,9 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .attr("transform", `translate(${marginLeft},0)`)
         .call(yAxis)
         .call(g => g.select(".domain").remove())
+        .call(g => g.selectAll(".tick line").clone()
+          .attr("x2", width - marginLeft - marginRight)
+          .attr("stroke-opacity", 0.1))
       .call(g => g.selectAll("text").style("font-size", "12px"))
       .append("text")
       .attr("x", -marginLeft - 130)
