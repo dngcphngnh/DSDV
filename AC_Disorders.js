@@ -11,7 +11,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
 
     let color = d3.scaleOrdinal()
       .domain(groupedData.map(d => d.SleepDisorder))
-      .range(["#30535f", "#1f3b4d", "#09191f"]);
+      .range(["#298c8c", "#a00000", "#8b8b8b"]);
   
     let pie = d3.pie()
       .sort(null)
