@@ -1,3 +1,4 @@
+
 d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(function(data) {
     // Group and summarize data
     let groupedData = Array.from(
@@ -20,8 +21,8 @@ if (!groupedData.some(d => d.Age === 47)) {
 
     groupedData.sort((a, b) => a.Age - b.Age);
 
-    let width = 1200;
-    let height = 600;
+    let width = 1000;
+    let height = 500;
     let marginTop = 40;
     let marginRight = 10;
     let marginBottom = 60;
@@ -89,7 +90,7 @@ if (!groupedData.some(d => d.Age === 47)) {
         .call(g => g.selectAll("text").style("font-size", "12px"))
         .append("text")
         .attr("transform", `rotate(-90, -${marginLeft / 2}, ${marginTop - 10})`)
-        .attr("x", -marginLeft - 200)
+        .attr("x", -marginLeft - 130)
         .attr("y", marginTop - 3)
         .attr("fill", "black")
         .attr("text-anchor", "middle")
@@ -106,7 +107,7 @@ if (!groupedData.some(d => d.Age === 47)) {
         .style("padding", "0px")
         .style("font-size", "16px")
         .style("background", "white")
-        .style("border", "0px")
+        .style("border", "1px solid #ccc")
         .style("pointer-events", "none")
         .style("opacity", 0);
 });
