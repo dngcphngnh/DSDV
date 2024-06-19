@@ -4,9 +4,18 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
       d3.group(data, d => d.Age),
       ([key, values]) => ({
           Age: +key,
-          SleepDuration: d3.mean(values, d => +d.SleepDuration).toFixed(2)
+          SleepDuration: +d3.mean(values, d => +d.SleepDuration).toFixed(2)
       })
   );
+
+  if (!groupedData.some(d => d.Age === 46)) {
+    groupedData.push({ Age: 46, Count: 0 });
+}
+
+// Ensure there's an entry for Age 47 with count 0 if missing
+if (!groupedData.some(d => d.Age === 47)) {
+  groupedData.push({ Age: 47, Count: 0 });
+}
 
   groupedData.sort((a, b) => a.Age - b.Age);
 
@@ -17,33 +26,39 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
   let marginBottom = 60;
   let marginLeft = 150;
 
-  // Define x scale
-  let x = d3.scaleLinear()
-      .domain([d3.min(groupedData, d => d.Age), d3.max(groupedData, d => d.Age)]).nice()
-      .range([marginLeft, width - marginRight]);
+  // Define x scale as a band scale
+  let x = d3.scaleBand()
+      .domain(groupedData.map(d => d.Age))
+      .range([marginLeft, width - marginRight])
+      .padding(0.1);
 
+  const xAxis = d3.axisBottom(x).tickSizeOuter(0);
 
   // Define y scale
   let y = d3.scaleLinear()
       .domain([0, d3.max(groupedData, d => d.SleepDuration)]).nice()
       .range([height - marginBottom, marginTop]);
 
+  const yAxis = d3.axisLeft(y);
+
   // Create the SVG container.
   let svg = d3.select("body").append("svg")
       .attr("width", width)
       .attr("height", height)
-      .attr("viewBox", [0, 0, width, height]);
+      .attr("viewBox", [0, 0, width, height])
+      .attr("style", "max-width: 100%; height: auto;");
 
-  
+  // Add the bars
   svg.append("g")
+      .attr("class", "bars")
       .attr("fill", "#298c8c")
       .selectAll("rect")
       .data(groupedData)
       .join("rect")
-      .attr("x", d => x(d.Age) - 10)
+      .attr("x", d => x(d.Age))
       .attr("y", d => y(d.SleepDuration))
       .attr("height", d => y(0) - y(d.SleepDuration))
-      .attr("width", 20) // Fixed width for bars
+      .attr("width", 20)
       .on("mouseover", function(event, d) {
           d3.select(this).attr("fill", "#8b8b8b");
           tooltip.transition().duration(200).style("opacity", 1);
@@ -58,8 +73,9 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
 
   // Add the x-axis and label.
   svg.append("g")
+      .attr("class", "x-axis")
       .attr("transform", `translate(0,${height - marginBottom})`)
-      .call(d3.axisBottom(x).tickSizeOuter(0))
+      .call(xAxis)
       .call(g => g.selectAll("text").style("font-size", "12px"))
       .append("text")
       .attr("x", (width - marginLeft - marginRight) / 2 + marginLeft)
@@ -71,8 +87,9 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
 
   // Add the y-axis and label, and remove the domain line.
   svg.append("g")
+      .attr("class", "y-axis")
       .attr("transform", `translate(${marginLeft},0)`)
-      .call(d3.axisLeft(y))
+      .call(yAxis)
       .call(g => g.select(".domain").remove())
       .call(g => g.selectAll(".tick line").clone()
           .attr("x2", width - marginLeft - marginRight)
@@ -80,13 +97,12 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
       .call(g => g.selectAll("text").style("font-size", "12px"))
       .append("text")
       .attr("transform", `rotate(-90, -${marginLeft / 2}, ${marginTop - 10})`)
-      .attr("x", -marginLeft - 140)
+      .attr("x", -marginLeft - 130)
       .attr("y", marginTop - 3)
       .attr("fill", "black")
       .text("Mean Sleep Duration")
       .attr("text-anchor", "middle")
       .style("font-size", "20px");
-
 
   // Create a tooltip div that is hidden by default
   const tooltip = d3.select("body").append("div")
@@ -100,7 +116,26 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
       .style("pointer-events", "none")
       .style("opacity", 0);
 
+  function zoom(svg) {
+      const extent = [[marginLeft, marginTop], [width - marginRight, height - marginBottom]];
 
-  }).catch(function(error) {
+      svg.call(d3.zoom()
+          .scaleExtent([1, 8])
+          .translateExtent(extent)
+          .extent(extent)
+          .on("zoom", zoomed));
+
+      function zoomed(event) {
+          x.range([marginLeft, width - marginRight].map(d => event.transform.applyX(d)));
+          svg.selectAll(".bars rect")
+              .attr("x", d => x(d.Age))
+              .attr("width", x.bandwidth());
+          svg.selectAll(".x-axis").call(xAxis);
+      }
+  }
+
+  svg.call(zoom);
+
+}).catch(function(error) {
   console.log(error);
 });
