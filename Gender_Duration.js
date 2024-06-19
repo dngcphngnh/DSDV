@@ -11,18 +11,15 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
 
     console.log(groupedData); // Check the transformed data structure
 
-    let width = 928;
+    let width = 1000;
     let height = 600;
     let marginTop = 40;
-    let marginRight = 20;
-    let marginBottom = 30;
-    let marginLeft = 30;
+    let marginRight = 10;
+    let marginBottom = 60;
+    let marginLeft = 150;
 
     let x = d3.scaleLinear()
-        .domain([
-            d3.min(groupedData, d => d3.min(d.values, v => v.SleepDuration)),
-            d3.max(groupedData, d => d3.max(d.values, v => v.SleepDuration))
-        ]).nice()
+        .domain([d3.min(groupedData, d => d3.min(d.values, v => v.SleepDuration)),d3.max(groupedData, d => d3.max(d.values, v => v.SleepDuration))]).nice()
         .range([marginLeft, width - marginRight]);
 
     let y = d3.scaleLinear()
@@ -32,27 +29,20 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
     let svg = d3.select("body").append("svg")
         .attr("width", width)
         .attr("height", height)
-        .attr("viewBox", [0, 0, width, height])
-        .attr("style", "max-width: 100%; height: auto; overflow: visible; font: 10px sans-serif;");
-
-    // Add the title.
-    svg.append("text")
-        .attr("x", (width - marginLeft - marginRight) / 2 + marginLeft)
-        .attr("y", marginTop - 10)
-        .attr("text-anchor", "middle")
-        .attr("font-size", "16px")
-        .attr("font-weight", "bold")
-        .text("Sleep Duration vs Number of People by Gender");
+        .attr("viewBox", [0, 0, width, height]);
 
     // Add the horizontal axis.
     svg.append("g")
         .attr("transform", `translate(0,${height - marginBottom})`)
         .call(d3.axisBottom(x).ticks(8).tickSizeOuter(0))
+        .call(g => g.selectAll("text").style("font-size", "12px"))
         .append("text")
-        .attr("x", width - marginRight)
-        .attr("y", -6)
-        .attr("fill", "currentColor")
-        .attr("text-anchor", "end")
+        .attr("x", (width - marginLeft - marginRight) / 2 + marginLeft)
+        .attr("y", marginBottom - 5)
+        .attr("fill", "black")
+        .attr("text-anchor", "middle")
+        .text("Age")
+        .style("font-size", "20px")
         .text("Sleep Duration");
 
     // Add the vertical axis.
@@ -63,17 +53,21 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .call(g => g.selectAll(".tick line").clone()
             .attr("x2", width - marginLeft - marginRight)
             .attr("stroke-opacity", 0.1))
+        .call(g => g.selectAll("text").style("font-size", "12px"))
         .append("text")
-        .attr("x", -marginLeft)
-        .attr("y", 10)
-        .attr("fill", "currentColor")
-        .attr("text-anchor", "start")
-        .text("↑ Number of People");
+        .attr("transform", `rotate(-90, -${marginLeft / 2}, ${marginTop - 10})`)
+        .attr("x", -marginLeft - 150)
+        .attr("y", marginTop - 3)
+        .attr("fill", "black")
+        .text("Mean Sleep Duration")
+        .attr("text-anchor", "middle")
+        .style("font-size", "20px")
+        .text("Number of People");
 
     // Create a color scale for the genders
     const color = d3.scaleOrdinal()
         .domain(groupedData.map(d => d.Gender))
-        .range(["#03045e", "#00b4d8"]);
+        .range(["#3d606e", "#09191f"]);
 
     // Create a line generator function
     const line = d3.line()
@@ -132,22 +126,22 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
 
     // Add legend
     const legend = svg.append("g")
-        .attr("transform", `translate(${width - marginRight - 100}, ${marginTop})`);
+        .attr("transform", `translate(${width - marginRight - 150}, ${marginTop})`);
 
     groupedData.forEach((d, i) => {
         const legendRow = legend.append("g")
-            .attr("transform", `translate(0, ${i * 20})`);
+            .attr("transform", `translate(0, ${i * 40})`);
 
         legendRow.append("rect")
-            .attr("width", 10)
-            .attr("height", 10)
+            .attr("width", 30)
+            .attr("height", 30)
             .attr("fill", color(d.Gender));
 
         legendRow.append("text")
-            .attr("x", 20)
-            .attr("y", 10)
+            .attr("x", 50)
+            .attr("y", 20)
             .attr("text-anchor", "start")
-            .attr("font-size", "12px")
+            .attr("font-size", "16px")
             .text(d.Gender);
     });
 }).catch(function(error) {
