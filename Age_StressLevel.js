@@ -16,12 +16,12 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
     );
 
     // Specify the chart’s dimensions.
-    const width = 928;
+    const width = 1000;
     const height = 500;
-    const marginTop = 20;
-    const marginRight = 0;
+    const marginTop = 40;
+    const marginRight = 10;
     const marginBottom = 60; // Increased to accommodate the x-axis title
-    const marginLeft = 60; // Increased to accommodate the y-axis title
+    const marginLeft = 150; // Increased to accommodate the y-axis title
 
     // Create the horizontal scale and its axis generator.
     const x = d3.scaleBand()
