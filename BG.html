@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Data Science and Data Visualization</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body, h1, h2, h3, h4, h5, h6 {
+            font-family: "Raleway", sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            line-height: 1.8;
+            background-color: #f5f5f5; 
+        }
+
+        .bgimg-1 {
+            background-position: center;
+            background-size: cover;
+            background-image: url("https://www.w3schools.com/w3images/mac.jpg");
+            min-height: 100%;
+        }
+
+        .w3-bar .w3-button {
+            padding: 16px;
+        }
+
+        .w3-top {
+            background-color: #f3f5f6; 
+        }
+
+        .w3-card {
+            background-color: #ffffff; 
+        }
+
+        footer {
+            background-color: #f6f8f9; 
+            color: white;
+        }
+
+        .w3-button {
+            background-color: #7e8084 !important;
+            color: white !important;
+        }
+
+        .w3-button:hover {
+            background-color: #f7f9fa !important; 
+        }
+
+        .section-header {
+            font-weight: bold;
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f7f9fb;
+            padding-bottom: 10px;
+        }
+
+        .chart-container {
+            margin-bottom: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: 120px;
+            height: 55px;
+            padding: 0px;
+            font-size: 16px;
+            background: white;
+            border: 1px solid #ccc;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .section-container {
+            background-color: #ffffff;
+            padding: 60px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+<div class="w3-top">
+    <div class="w3-bar w3-card" id="myNavbar">
+        <a href="#home" class="w3-bar-item w3-button w3-wide">LOGO</a>
+        <div class="w3-right w3-hide-small">
+            <a href="#allCategories" class="w3-bar-item w3-button">ALL CATEGORIES</a>
+            <a href="#gender" class="w3-bar-item w3-button"><i class="fa fa-user"></i> GENDER</a>
+            <a href="#age" class="w3-bar-item w3-button"><i class="fa fa-th"></i> AGE</a>
+        </div>
+        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+</div>
+
+<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+    <a href="#allCategories" onclick="w3_close()" class="w3-bar-item w3-button">ALL CATEGORIES</a>
+    <a href="#gender" onclick="w3_close()" class="w3-bar-item w3-button">GENDER</a>
+    <a href="#age" onclick="w3_close()" class="w3-bar-item w3-button">AGE</a>
+</nav>
+
+<!-- Header with full-height image -->
+<header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+    <div class="w3-display-left w3-text-white" style="padding:48px">
+        <span class="w3-jumbo w3-hide-small">Data Science and Data Visualization</span><br>
+        <span class="w3-xxlarge w3-hide-large w3-hide-medium">Final Project</span><br>
+        <span class="w3-large">SleepHealth and Lifestyle.</span>
+        <p><a href="#allCategories" class="w3-button w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Learn more and start today</a></p>
+    </div> 
+    <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+        <i class="fa fa-instagram w3-hover-opacity"></i>
+        <i class="fa fa-snapchat w3-hover-opacity"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+        <i class="fa fa-twitter w3-hover-opacity"></i>
+        <i class="fa fa-linkedin w3-hover-opacity"></i>
+    </div>
+</header>
+
+<div style="margin-top:50px;"></div>
+
+
+<div class="w3-row-padding w3-margin-bottom">
+    <div class="w3-quarter">
+      <div class="w3-container w3-red w3-padding-16">
+        <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+        <div class="w3-right">
+          <h3>52</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>Mean Duration</h4>
+      </div>
+    </div>
+    <div class="w3-quarter">
+      <div class="w3-container w3-blue w3-padding-16">
+        <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
+        <div class="w3-right">
+          <h3>99</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>Mean Stress Level</h4>
+      </div>
+    </div>
+    <div class="w3-quarter">
+      <div class="w3-container w3-teal w3-padding-16">
+        <div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
+        <div class="w3-right">
+          <h3>23</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>Mean Quality</h4>
+      </div>
+    </div>
+  </div>
+
+<div class="w3-container section-container" id="allCategories">
+    <h5 class="section-header">All Categories</h5>
+    <div class="chart-container">
+        <canvas id="allCategoriesChart1"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="allCategoriesChart2"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="allCategoriesChart3"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="allCategoriesChart4"></canvas>
+    </div>
+</div>
+
+<div class="w3-container section-container" id="gender">
+    <h5 class="section-header">Gender</h5>
+    <div class="chart-container">
+        <canvas id="genderChart1"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="genderChart2"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="genderChart3"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="genderChart4"></canvas>
+    </div>
+</div>
+
+<div class="w3-container section-container" id="age">
+    <h5 class="section-header">Age</h5>
+    <div class="chart-container">
+        <canvas id="ageChart1"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="ageChart2"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="ageChart3"></canvas>
+    </div>
+    <div class="chart-container">
+        <canvas id="ageChart4"></canvas>
+    </div>
+</div>
+
+<!-- Google Maps -->
+<div id="googleMap" class="w3-greyscale" style="width:100%;height:510px;"></div>
+
+<footer class="w3-center w3-padding-64">
+    <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+    <div class="w3-xlarge w3-section">
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+        <i class="fa fa-instagram w3-hover-opacity"></i>
+        <i class="fa fa-snapchat w3-hover-opacity"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+        <i class="fa fa-twitter w3-hover-opacity"></i>
+        <i class="fa fa-linkedin w3-hover-opacity"></i>
+    </div>
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+</footer>
+
+<script>
+    function onClick(element) {
+        document.getElementById("img01").src = element.src;
+        document.getElementById("modal01").style.display = "block";
+        var captionText = document.getElementById("caption");
+        captionText.innerHTML = element.alt;
+    }
+
+    // Modal Image Gallery
+    function onClick(element) {
+        document.getElementById("img01").src = element.src;
+        document.getElementById("modal01").style.display = "block";
+        var captionText = document.getElementById("caption");
+        captionText.innerHTML = element.alt;
+    }
+
+    window.onscroll = function() {myFunction()};
+    function myFunction() {
+        var navbar = document.getElementById("myNavbar");
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
+        } else {
+            navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "");
+        }
+    }
+
+    function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+    }
+    function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+    }
+    
+
+</script>
+</body>
+</html>
