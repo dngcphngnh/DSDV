@@ -3,11 +3,11 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
     let groupedData = d3.rollups(
       data,
       v => v.length,
-      d => d.SleepDisorder || "N/A" // Replace null values with "N/A"
+      d => d.SleepDisorder || "None" // Replace null values with "N/A"
     ).map(d => ({ SleepDisorder: d[0], Count: d[1] }));
   
     let width = 1000;
-    let height = Math.min(width, 700);
+    let height = Math.min(width, 500);
 
     let color = d3.scaleOrdinal()
       .domain(groupedData.map(d => d.SleepDisorder))
@@ -38,15 +38,14 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
     const tooltip = d3.select("body").append("div")
       .attr("class", "tooltip")
       .style("position", "absolute")
-        .style("text-align", "center")
-        .style("width", "120px")
-        .style("height", "38px")
-        .style("padding", "0px")
-        .style("font-size", "16px")
-        .style("background", "white")
-        .style("border", "0px")
-        .style("pointer-events", "none")
-        .style("opacity", 0);
+      .style("width", "100px")
+      .style("height", "35px")
+      .style("padding", "5px")
+      .style("font-size", "16px")
+      .style("background", "white")
+      .style("border", "1px solid #ccc")
+      .style("pointer-events", "none")
+      .style("opacity", 0);
   
     // Add a sector path for each value
     svg.append("g")
@@ -96,7 +95,6 @@ legend.append("text")
     .attr("x", 80)
     .attr("y", 14)
     .attr("dy", "0.35em")
-    .attr("fill", d => color(d.SleepDisorder))
     .attr("font-size", "20px")
     .text(d => d.SleepDisorder === "N/A" ? "None" : d.SleepDisorder);
   
