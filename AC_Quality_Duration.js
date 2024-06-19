@@ -102,7 +102,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .on("mouseover", function(event, d) {
             d3.select(this).attr("r", 7).attr("fill", "#3d606e");
             tooltip.transition().duration(200).style("opacity", 1);
-            tooltip.html(`Quality of Sleep: ${d.QualityofSleep}<br>Sleep Duration: ${d.SleepDuration}`)
+            tooltip.html(`Quality of Sleep: ${d.QualityofSleep}<br>Mean Sleep Duration: ${d.SleepDuration}`)
                 .style("left", (event.pageX + 5) + "px")
                 .style("top", (event.pageY - 28) + "px");
         })
