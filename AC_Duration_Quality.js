@@ -10,12 +10,12 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
 
     groupedData.sort((a, b) => a.SleepDuration - b.SleepDuration);
 
-    let width = 928;
+    let width = 1200;
     let height = 600;
-    let marginTop = 20;
-    let marginRight = 20;
-    let marginBottom = 30;
-    let marginLeft = 30;
+    let marginTop = 40;
+    let marginRight = 10;
+    let marginBottom = 60;
+    let marginLeft = 150;
 
     // Define x scale
     let x = d3.scaleLinear()
@@ -31,19 +31,21 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
     let svg = d3.select("body").append("svg")
         .attr("width", width)
         .attr("height", height)
-        .attr("viewBox", [0, 0, width, height])
-        .attr("style", "max-width: 100%; height: auto; overflow: visible; font: 10px sans-serif;");
+        .attr("viewBox", [0, 0, width, height]);
 
     // Add the horizontal axis.
     svg.append("g")
         .attr("transform", `translate(0,${height - marginBottom})`)
-        .call(d3.axisBottom(x).ticks(8).tickSizeOuter(0))
-        .call(g => g.append("text")
-            .attr("x", width - marginRight)
-            .attr("y", -4)
-            .attr("fill", "currentColor")
-            .attr("text-anchor", "end")
-            .text("Sleep Duration"));
+        .call(d3.axisBottom(x).tickSizeOuter(0))
+        .call(g => g.selectAll("text").style("font-size", "12px"))
+        .append("text")
+        .attr("x", (width - marginLeft - marginRight) / 2 + marginLeft)
+        .attr("y", marginBottom - 5)
+        .attr("fill", "black")
+        .attr("text-anchor", "middle")
+        .text("Sleep Quality")
+        .style("font-size", "20px");
+
 
     // Add the vertical axis.
     svg.append("g")
@@ -53,12 +55,15 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .call(g => g.selectAll(".tick line").clone()
             .attr("x2", width - marginLeft - marginRight)
             .attr("stroke-opacity", 0.1))
-        .call(g => g.append("text")
-            .attr("x", -marginLeft)
-            .attr("y", 10)
-            .attr("fill", "currentColor")
-            .attr("text-anchor", "start")
-            .text("↑ Mean Quality of Sleep"));
+        .call(g => g.selectAll("text").style("font-size", "12px"))
+        .append("text")
+        .attr("transform", `rotate(-90, -${marginLeft / 2}, ${marginTop - 10})`)
+        .attr("x", -marginLeft - 200)
+        .attr("y", marginTop - 3)
+        .attr("fill", "black")
+        .text("Mean Sleep Duration")
+        .attr("text-anchor", "middle")
+        .style("font-size", "20px");
 
     // Define the line generator
     let line = d3.line()
@@ -69,7 +74,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
     svg.append("path")
         .datum(groupedData)
         .attr("fill", "none")
-        .attr("stroke", "#00b4d8")
+        .attr("stroke", "#3d606e")
         .attr("stroke-width", 1.5)
         .attr("d", line);
 
@@ -77,10 +82,13 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
     const tooltip = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("position", "absolute")
+        .style("text-align", "center")
+        .style("width", "120px")
+        .style("height", "55px")
+        .style("padding", "0px")
+        .style("font-size", "16px")
         .style("background", "white")
-        .style("padding", "5px")
-        .style("border", "1px solid black")
-        .style("border-radius", "5px")
+        .style("border", "0px")
         .style("pointer-events", "none")
         .style("opacity", 0);
 
@@ -91,9 +99,9 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .attr("cx", d => x(d.SleepDuration))
         .attr("cy", d => y(d.QualityofSleep))
         .attr("r", 5)
-        .attr("fill", "#00b4d8")
+        .attr("fill", "#3d606e")
         .on("mouseover", function(event, d) {
-            d3.select(this).attr("r", 7).attr("fill", "#03045e");
+            d3.select(this).attr("r", 7).attr("fill", "#153b47");
             tooltip.transition().duration(200).style("opacity", 1);
             tooltip.html(`Quality of Sleep: ${d.QualityofSleep.toFixed(2)}<br>Sleep Duration: ${d.SleepDuration}`)
                 .style("left", (event.pageX + 5) + "px")
@@ -104,7 +112,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
                 .style("top", (event.pageY - 28) + "px");
         })
         .on("mouseout", function() {
-            d3.select(this).attr("r", 5).attr("fill", "#00b4d8");
+            d3.select(this).attr("r", 5).attr("fill", "#3d606e");
             tooltip.transition().duration(200).style("opacity", 0);
         });
 
