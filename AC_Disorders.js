@@ -32,8 +32,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
     let svg = d3.select("body").append("svg")
       .attr("width", width)
       .attr("height", height)
-      .attr("viewBox", [-width / 2, -height / 2, width, height])
-      .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;");
+      .attr("viewBox", [-width / 2, -height / 2, width, height]);
   
     // Create tooltip
     const tooltip = d3.select("body").append("div")
