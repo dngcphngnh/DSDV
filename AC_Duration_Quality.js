@@ -11,7 +11,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
     groupedData.sort((a, b) => a.SleepDuration - b.SleepDuration);
 
     let width = 1000;
-    let height = 600;
+    let height = 500;
     let marginTop = 40;
     let marginRight = 10;
     let marginBottom = 60;
@@ -58,7 +58,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .call(g => g.selectAll("text").style("font-size", "12px"))
         .append("text")
         .attr("transform", `rotate(-90, -${marginLeft / 2}, ${marginTop - 10})`)
-        .attr("x", -marginLeft - 200)
+        .attr("x", -marginLeft - 120)
         .attr("y", marginTop - 3)
         .attr("fill", "black")
         .text("Mean Sleep Duration")
@@ -83,12 +83,12 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .attr("class", "tooltip")
         .style("position", "absolute")
         .style("text-align", "center")
-        .style("width", "120px")
+        .style("width", "140px")
         .style("height", "55px")
         .style("padding", "0px")
         .style("font-size", "16px")
         .style("background", "white")
-        .style("border", "0px")
+        .style("border", "1px solid #ccc")
         .style("pointer-events", "none")
         .style("opacity", 0);
 
@@ -101,7 +101,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .attr("r", 5)
         .attr("fill", "#3d606e")
         .on("mouseover", function(event, d) {
-            d3.select(this).attr("r", 7).attr("fill", "#153b47");
+            d3.select(this).attr("r", 7).attr("fill", "#3d606e");
             tooltip.transition().duration(200).style("opacity", 1);
             tooltip.html(`Quality of Sleep: ${d.QualityofSleep.toFixed(2)}<br>Sleep Duration: ${d.SleepDuration}`)
                 .style("left", (event.pageX + 5) + "px")
