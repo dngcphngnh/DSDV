@@ -78,7 +78,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
 
     // Add legend
     let legend = svg.append("g")
-    .attr("transform", `translate(${width / 2 - 300},${-height / 2 + 50})`)
+    .attr("transform", `translate(${width / 2 - 260},${-height / 2 + 50})`)
     .attr("font-size", 12)
     .attr("text-anchor", "start")
     .selectAll("g")
