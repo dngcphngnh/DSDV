@@ -141,7 +141,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
             .attr("x", 50)
             .attr("y", 20)
             .attr("text-anchor", "start")
-            .attr("font-size", "16px")
+            .attr("font-size", "18px")
             .text(d.Gender);
     });
 }).catch(function(error) {
