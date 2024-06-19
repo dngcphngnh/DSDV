@@ -46,7 +46,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .attr("y", marginBottom - 5)
         .attr("fill", "black")
         .attr("text-anchor", "middle")
-        .text("Sleep Quality")
+        .text("Quality of Sleep")
         .style("font-size", "20px");
  
  
