@@ -10,12 +10,12 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
 
     console.log(groupedData); // Check the transformed data structure
 
-    let width = 928;
-    let height = 600;
+    let width = 1000;
+    let height = 500;
     let marginTop = 40;
-    let marginRight = 20;
-    let marginBottom = 30;
-    let marginLeft = 30;
+    let marginRight = 10;
+    let marginBottom = 60;
+    let marginLeft = 150;
 
     const x = d3.scaleBand()
         .domain(groupedData.map(d => d.StressLevel))
@@ -30,12 +30,11 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
     const svg = d3.select("body").append("svg")
         .attr("width", width)
         .attr("height", height)
-        .attr("viewBox", [0, 0, width, height])
-        .attr("style", "max-width: 100%; height: auto;");
+        .attr("viewBox", [0, 0, width, height]);
 
     // Add a rect for each bar.
     svg.append("g")
-        .attr("fill", "steelblue")
+        .attr("fill", "#3d606e")
         .selectAll("rect")
         .data(groupedData)
         .join("rect")
@@ -44,14 +43,14 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .attr("height", d => y(0) - y(d.Count))
         .attr("width", x.bandwidth())
         .on("mouseover", function(event, d) {
-            d3.select(this).attr("fill", "#03045e");
+            d3.select(this).attr("fill", "#153b47");
             tooltip.transition().duration(200).style("opacity", 1);
             tooltip.html(`Stress Level: ${d.StressLevel}<br>Count: ${d.Count}`)
                 .style("left", (event.pageX + 5) + "px")
                 .style("top", (event.pageY - 28) + "px");
         })
         .on("mouseout", function() {
-            d3.select(this).attr("fill", "steelblue");
+            d3.select(this).attr("fill", "#3d606e");
             tooltip.transition().duration(200).style("opacity", 0);
         });
 
@@ -59,12 +58,14 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
     svg.append("g")
         .attr("transform", `translate(0,${height - marginBottom})`)
         .call(d3.axisBottom(x).tickSizeOuter(0))
+        .call(g => g.selectAll("text").style("font-size", "12px"))
         .append("text")
-        .attr("x", width - marginRight)
-        .attr("y", -4)
+        .attr("x", (width - marginLeft - marginRight) / 2 + marginLeft)
+        .attr("y", marginBottom - 5)
         .attr("fill", "currentColor")
         .attr("text-anchor", "end")
-        .text("Stress Level");
+        .text("Stress Level")
+        .style("font-size", "20px");
 
     // Add the y-axis and label, and remove the domain line.
     svg.append("g")
@@ -74,12 +75,15 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .call(g => g.selectAll(".tick line").clone()
             .attr("x2", width - marginLeft - marginRight)
             .attr("stroke-opacity", 0.1))
+        .call(g => g.selectAll("text").style("font-size", "12px"))
         .append("text")
-        .attr("x", -marginLeft)
-        .attr("y", 10)
+        .attr("transform", `rotate(-90, -${marginLeft / 2}, ${marginTop - 10})`)
+        .attr("x", -marginLeft - 140)
+        .attr("y", marginTop - 3)
         .attr("fill", "currentColor")
-        .attr("text-anchor", "start")
-        .text("↑ Count");
+        .attr("text-anchor", "middle")
+        .text("Count")
+        .style("font-size", "20px");
 
     // Create a tooltip div that is hidden by default
     const tooltip = d3.select("body").append("div")
@@ -91,7 +95,7 @@ d3.csv("https://raw.githubusercontent.com/dngcphngnh/DSDV/main/Data.csv").then(f
         .style("padding", "2px")
         .style("background", "white")
         .style("border", "0px")
-        .style("border-radius", "8px")
+        .style("border", "1px solid #ccc")
         .style("pointer-events", "none")
         .style("opacity", 0);
 
