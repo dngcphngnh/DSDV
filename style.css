@@ -11,3 +11,11 @@
     fill: navy;
     font-weight: bold;
 }
+svg {
+    width: 80%;  /* Ensure SVG takes the full width of the container */
+    height: auto;  /* Adjust height proportionally */
+}
+.w3-text-custom-red {
+    color: #a00000 !important;
+  }
+  
